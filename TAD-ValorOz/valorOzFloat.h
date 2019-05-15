@@ -15,7 +15,6 @@ class ValorOzFloat : public ValorOz{
     public:
         //Constructor de la clase, metodos set y get.
         ValorOzFloat(double _val);
-        void setVal(double _val);
         double getVal();
 };
 

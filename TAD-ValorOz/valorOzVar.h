@@ -15,7 +15,6 @@ class ValorOzVar : public ValorOz{
     public:
         //Constructor de la clase, metodos set y get
         ValorOzVar(string _var);
-        void setVal(string _var);
         string getVal();
 };
 

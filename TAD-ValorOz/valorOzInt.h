@@ -15,8 +15,7 @@ class ValorOzInt : public ValorOz{
     public:
         //Constructor de la clase, metodos set y get.
         ValorOzInt(int _val);
-        void setVal(int _val);
-        int getVal();
+        string getVal();
 };
 
 #endif

@@ -16,7 +16,6 @@ class ValorOzUnlinked : public ValorOz{
     public:
         //Constructor de la clase, metodos set y get.
         ValorOzUnlinked(string _val);
-        void setVal(string _var);
         string getVal();
 };
 
