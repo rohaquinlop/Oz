@@ -13,7 +13,7 @@
 * Diseño e implementación de operaciones generales sobre un Tipo Abstracto de Dato.
 
 ## To-Do List
-* Implementar TAD ValorOz
+* ~~Implementar TAD ValorOz~~
 * Implementar TAD Almacen
 * Implementar la clase Operaciones
 * Mantener la ligadura de las variables a un solo nivel (Entrada)
