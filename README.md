@@ -21,4 +21,4 @@
 * Implementar funcion que verifique el nivel de las variables en el almacen para mantener el árbol en dos niveles.
 
 ## Notas del proyecto
-Hasta ahora el proyecto se empieza a reescribir corrigiendo los errores que ya tiene, cambiando el uso de vectores a listas, cambiar el TAD ValorOz que se tenía, esto implica que se deba cambiar el TAD Almacen y el TAD Operaciones (En realidad es una clase), es decir, nada de lo que estaba escrito sirve.
+Ya se implementó nuevamente el TAD ValorOz y la operacion parse que retorna un mapa con cada posicion (izquierda y derecha).
