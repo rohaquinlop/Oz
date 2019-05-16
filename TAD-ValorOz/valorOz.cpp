@@ -6,10 +6,10 @@ using namespace std;
 
 //Métodos, set, get, constructores...
 
-valorOz :: valorOz(string _type){
+ValorOz :: ValorOz(string _type){
 	type = _type;
 }
 
-string valorOz :: getType(){
+string ValorOz :: getType(){
 	return type;
 }

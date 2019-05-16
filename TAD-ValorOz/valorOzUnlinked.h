@@ -1,11 +1,9 @@
-#ifndef VALOROZ_H
-#define VALOROZ_H
-
-//Importar las librerias necesarias
 #include "valorOz.h"
 #include <iostream>
 #include <string>
-#include <map>
+
+#ifndef VALOROZUNLINKED_H
+#define VALOROZUNLINKED_H
 
 using namespace std;
 
@@ -15,7 +13,7 @@ class ValorOzUnlinked : public ValorOz{
         string val;
     public:
         //Constructor de la clase, metodos set y get.
-        ValorOzUnlinked(string _val);
+        ValorOzUnlinked(string _type, string _val);
         string getVal();
 };
 

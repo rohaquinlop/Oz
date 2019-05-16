@@ -1,11 +1,9 @@
-#ifndef VALOROZ_H
-#define VALOROZ_H
-
-//Importar las librerias necesarias
 #include "valorOz.h"
 #include <iostream>
 #include <string>
-#include <map>
+
+#ifndef VALOROZFLOAT_H
+#define VALOROZFLOAT_H
 
 using namespace std;
 
@@ -13,9 +11,10 @@ class ValorOzFloat : public ValorOz{
     private:
         double val;
     public:
-        //Constructor de la clase, metodos set y get.
-        ValorOzFloat(double _val);
-        double getVal();
+        //Constructor de la clase
+        ValorOzFloat(string _type, double _val);
+        //Metodo get
+        string getVal();
 };
 
 #endif

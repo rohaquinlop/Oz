@@ -1,11 +1,9 @@
-#ifndef VALOROZ_H
-#define VALOROZ_H
-
-//Importar las librerias necesarias
 #include "valorOz.h"
 #include <iostream>
 #include <string>
-#include <map>
+
+#ifndef VALOROZVAR_H
+#define VALOROZVAR_H
 
 using namespace std;
 
@@ -14,7 +12,7 @@ class ValorOzVar : public ValorOz{
         string var;
     public:
         //Constructor de la clase, metodos set y get
-        ValorOzVar(string _var);
+        ValorOzVar(string _type, string _var);
         string getVal();
 };
 

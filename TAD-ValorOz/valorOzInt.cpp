@@ -1,15 +1,16 @@
 #include "valorOzInt.h"
+#include "valorOz.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
 //Métodos, set, get, constructores...
-valorOzInt :: valorOzInt(int _val){
-	val = _val;
+ValorOzInt :: ValorOzInt(string _type, int _val) : ValorOz(_type){
+	this->val = _val;
 }
 
-string valorOzInt :: getVal(){
-	string value = to_string(val);
+string ValorOzInt :: getVal(){
+	string value = to_string(this->val);
 	return value;
 }

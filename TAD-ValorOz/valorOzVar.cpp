@@ -1,4 +1,5 @@
 #include "valorOzVar.h"
+#include "valorOz.h"
 #include <iostream>
 #include <string>
 
@@ -6,10 +7,10 @@ using namespace std;
 
 //Métodos, set, get, constructores...
 
-valorOzVar :: valorOzVar(string _var){
-	var = _var;
+ValorOzVar :: ValorOzVar(string _type, string _var) : ValorOz(_type){
+	this->var = _var;
 }
 
-string valorOzVar :: getVal(){
-	return var;
+string ValorOzVar :: getVal(){
+	return this->var;
 }
