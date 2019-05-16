@@ -11,7 +11,9 @@ using namespace std;
 class Operaciones{
     public:
         //Metodos
-        map<string, string> parse(string _s);
+        map<string, string> parse(string s);
+        bool isInt(string s);
+        string evalType(string s);
 };
 
 #endif
