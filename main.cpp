@@ -19,6 +19,14 @@ int main(){
 
 	a.addVal("X", v);
 
+	v = new ValorOzVar("var", "X");
+
+	a.addVal("Y", v);
+
+	v = new ValorOzFloat("float", 11.002);
+
+	a.addVal("X", v);
+
 	a.showInfo();
 
     return 0;
