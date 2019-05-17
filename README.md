@@ -14,7 +14,7 @@
 
 ## To-Do List
 * ~~Implementar TAD ValorOz~~
-* Implementar TAD Almacen
+* ~~Implementar TAD Almacen~~
 * Implementar la clase Operaciones
 * Mantener la ligadura de las variables a un solo nivel (Entrada)
 * Implementar los registros o "records". (**Arbol**)
