@@ -12,7 +12,14 @@
 using namespace std;
 
 int main(){
+	Almacen a;
+	ValorOz* v;
 
+	v = new ValorOzInt("int", 10);
+
+	a.addVal("X", v);
+
+	a.showInfo();
 
     return 0;
 }
