@@ -20,8 +20,10 @@ class ValorOz{
 
     public:
         //Constructor, metodos: set, get
+        ValorOz();
         ValorOz(string _type);
         string getType();
+        virtual string getVal();
 };
 
 #endif
