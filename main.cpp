@@ -1,4 +1,4 @@
-#include "Operaciones/operaciones.h"
+#include "Operacion/operacion.h"
 #include "TAD-Almacen/almacen.h"
 #include "TAD-ValorOz/valorOz.h"
 #include "TAD-ValorOz/valorOzFloat.h"
