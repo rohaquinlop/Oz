@@ -1,13 +1,27 @@
+#include "../TAD-ValorOz/valorOz.h"
+#include "../TAD-ValorOz/valorOzFloat.h"
+#include "../TAD-ValorOz/valorOzInt.h"
+#include "../TAD-ValorOz/valorOzRec.h"
+#include "../TAD-ValorOz/valorOzUnlinked.h"
+#include "../TAD-ValorOz/valorOzVar.h"
+#include "../Operacion/operacion.h"
+#include <iostream>
+#include <string>
+#include <map>
+#include <algorithm>
+
 #ifndef ALMACEN_H
 #define ALMACEN_H
 
-//Importar las librerias necesarias
+using namespace std;
 
 class Almacen{
     private:
-        //Atributos
+        map<string, ValorOz*> almacen;
     public:
-        //Metodos, set, get, constructores...
+        Almacen();
+        void showInfo();
+        void addVal(string name, ValorOz* valOz);
 };
 
 #endif
