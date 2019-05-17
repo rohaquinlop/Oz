@@ -16,7 +16,3 @@ ValorOz :: ValorOz(string _type){
 string ValorOz :: getType(){
 	return type;
 }
-
-string ValorOz :: getVal(){
-	return "none";
-}

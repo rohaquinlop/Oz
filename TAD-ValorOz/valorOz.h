@@ -23,7 +23,6 @@ class ValorOz{
         ValorOz();
         ValorOz(string _type);
         string getType();
-        virtual string getVal();
 };
 
 #endif
