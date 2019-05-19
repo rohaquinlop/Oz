@@ -14,3 +14,7 @@ ValorOzVar :: ValorOzVar(string _type, string _var) : ValorOz(_type){
 string ValorOzVar :: getVal(){
 	return this->var;
 }
+
+void ValorOzVar :: setVar(string _var){
+	this->var = _var;
+}
