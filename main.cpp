@@ -12,22 +12,28 @@
 using namespace std;
 
 int main(){
-	Almacen a;
+	Almacen almacen;
 	ValorOz* v;
 
 	v = new ValorOzInt("int", 10);
 
-	a.addVal("X", v);
+	almacen.addVal("X", v);
 
 	v = new ValorOzVar("var", "X");
 
-	a.addVal("Y", v);
+	almacen.addVal("Y", v);
 
-	v = new ValorOzFloat("float", 11.002);
+	v = new ValorOzVar("var", "Y");
 
-	a.addVal("X", v);
+	almacen.addVal("Z", v);
 
-	a.showInfo();
+	v = new ValorOzVar("var", "Z");
+
+	almacen.addVal("W", v);
+
+	almacen.showInfo();
+
+	cout << "Padre de W -> " << almacen.findFather( v ) << "\n";
 
     return 0;
 }
