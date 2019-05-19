@@ -22,6 +22,10 @@ class Almacen{
         Almacen();
         void showInfo();
         void addVal(string name, ValorOz* valOz);
+        string infoVal(ValorOz* valOz);
+        string infoVar(string name);
+        bool isLinked(string name);
+        string findFather(ValorOz* son);
 };
 
 #endif
