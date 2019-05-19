@@ -64,9 +64,9 @@ string Operacion :: evalType(string s){
 	*/
 	if ( s == "_" ){
 		return "unLinked";
-	}else if( s[0] >= 'A' || s[0] <= 'Z' ){
+	}else if( s[0] >= 'A' && s[0] <= 'Z' ){
 		return "var";
-	}else if( s[0] >= 'a' || s[0] <= 'z' ){
+	}else if( s[0] >= 'a' && s[0] <= 'z' ){
 		return "rec";
 	}else if( isInt(s) ){
 		return "int";
