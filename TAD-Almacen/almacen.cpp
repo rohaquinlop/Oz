@@ -16,6 +16,55 @@ using namespace std;
 Almacen :: Almacen(){
 }
 
+ValorOz* Almacen :: buildValorOz(string _type, string _val){
+	ValorOz* v;
+	std::string::size_type sz;
+	if( _type == "unLinked" ){
+		v = new ValorOzUnlinked(_type, _val);
+	}else if( _type == "int" ){
+		v = new ValorOzInt(_type, stoi(_val) );
+	}else if( _type == "float" ){
+		v = new ValorOzFloat(_type, stod(_val, &sz) );
+	}else if( _type == "var" ){
+		v = new ValorOzVar(_type, _val);
+	}else if( _type == "rec" ){
+		//Falta implementar...
+		//v = new ValorOzRec(_type, _val);
+	}
+
+	return v;
+}
+
+void  Almacen :: addVal( map<string, string> _m ){
+	/*
+	Esta funcion agrega una variable al almacen junto con su respectivo ValorOz
+	*/
+	string c1 = _m["c1"];
+	string c2 = _m["c2"];
+	Operacion o;
+	ValorOz* v;
+
+	if( o.evalType(c1) == "var" && o.evalType(c2) != "var" ){
+		/*
+		Si ambas campos ingresados son de tipos diferentes, y el primer
+		campo es una variable y el segundo no es una variable, entonces
+		se verifica si la variable existe en el almacen, en caso de que no
+		entonces asigna la variable con el Valor Oz que se ingreso
+		*/
+
+		map<string, ValorOz*>::iterator it;
+		it = almacen.find(c1);
+
+		if( it == almacen.end() ){
+			v = buildValorOz( o.evalType(c2), c2 );
+			almacen[c1] = v;
+		}else{
+			ValorOz* cmp = almacen[c1];
+		}
+	}
+
+}
+
 void Almacen :: showInfo(){
 	map<string, ValorOz*>::iterator it;
 	string type;
@@ -40,14 +89,6 @@ void Almacen :: showInfo(){
 		}
 		*/
 	}
-}
-
-void  Almacen :: addVal(string name, ValorOz* valOz){
-	/*
-	Esta funcion agrega una valorOz al almacen junto con su respectiva variable
-	Falta implementar...
-	*/
-	almacen[name] = valOz;
 }
 
 string Almacen :: infoVal( ValorOz* valOz ){
