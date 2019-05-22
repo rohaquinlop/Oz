@@ -12,8 +12,19 @@
 using namespace std;
 
 int main(){
+	Operacion operacion;
 	Almacen almacen;
-	ValorOz* v;
+	string line;
+	map<string, string> m;
+
+	while( getline(cin, line) ){
+		m = operacion.parse( line );
+		almacen.addVal( m );
+	}
+	almacen.showInfo();
+
+
+	/*
 
 	v = new ValorOzInt("int", 10);
 
@@ -34,6 +45,7 @@ int main(){
 	almacen.showInfo();
 
 	cout << "Padre de W -> " << almacen.findFather( v ) << "\n";
+	*/
 
     return 0;
 }
