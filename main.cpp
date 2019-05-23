@@ -23,13 +23,15 @@ int main(){
 		m = operacion.parse( line );
 		almacen.addVal( m );
 
+		if( twoLevelLink ){
+			almacen.keepTwoLevel();
+			twoLevelLink = false;
+		}
+
 		if( fail ){
       		cout << "La ligadura ingresada no es permitida: " << line <<"\n";
       		break;
     	}
-	}
-	if( twoLevelLink ){
-		almacen.keepTwoLevel();
 	}
 	almacen.showInfo();
 
