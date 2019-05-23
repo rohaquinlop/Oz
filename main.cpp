@@ -11,6 +11,8 @@
 
 using namespace std;
 
+bool fail = false;
+
 int main(){
 	Operacion operacion;
 	Almacen almacen;
@@ -20,6 +22,11 @@ int main(){
 	while( getline(cin, line) ){
 		m = operacion.parse( line );
 		almacen.addVal( m );
+
+		if( fail ){
+      		cout << "La ligadura ingresada no es permitida: " << line <<"\n";
+      		break;
+    	}
 	}
 	almacen.showInfo();
 
