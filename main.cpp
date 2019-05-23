@@ -11,7 +11,7 @@
 
 using namespace std;
 
-bool fail = false;
+bool fail = false, twoLevelLink = false;
 
 int main(){
 	Operacion operacion;
@@ -27,6 +27,9 @@ int main(){
       		cout << "La ligadura ingresada no es permitida: " << line <<"\n";
       		break;
     	}
+	}
+	if( twoLevelLink ){
+		almacen.keepTwoLevel();
 	}
 	almacen.showInfo();
 
