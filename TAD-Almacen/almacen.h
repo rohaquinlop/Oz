@@ -27,6 +27,7 @@ class Almacen{
         bool isLinked(string name);
         string findFather(ValorOz* son);
         bool existVar(string name);
+        void keepTwoLevel();
 };
 
 #endif

@@ -14,6 +14,7 @@
 using namespace std;
 
 extern bool fail;
+extern bool twoLevelLink;
 
 Almacen :: Almacen(){
 }
@@ -70,15 +71,23 @@ void  Almacen :: addVal( map<string, string> _m ){
 			father = findFather(v);
 			v = o.buildValorOz( o.evalType(c2), father );
 			almacen[c1] = v;
+			twoLevelLink = true;
 		}else if( existVar(c1) && !existVar(c2) ){
 			v = o.buildValorOz( o.evalType(c1), c1 );
 			father = findFather(v);
 			v = o.buildValorOz( o.evalType(c1), father );
 			almacen[c2] = v;
+			twoLevelLink = true;
 		}else if( existVar(c1) && existVar(c2) ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
 			//Los valores de dichas variables
-			if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
+			if( !isLinked(c1) ){
+				v = o.buildValorOz( o.evalType(c2), c2 );
+				almacen[c1] = v;
+			}else if( !isLinked(c2) ){
+				v = o.buildValorOz( o.evalType(c1), c1 );
+				almacen[c2] = v;
+			}else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
 				fail = true;
 			}
 		}
@@ -192,4 +201,19 @@ bool Almacen :: existVar(string name){
 		return false;
 	}
 
+}
+
+void Almacen :: keepTwoLevel(){
+	map<string, ValorOz*>::iterator it;
+	string father;
+
+	for(it = almacen.begin(); it != almacen.end(); it++){
+		ValorOz* v = it->second;
+		if( v->getType() == "var" ){
+			father = findFather(v);
+			if( father != infoVal(v) ){
+				((ValorOzVar*)v)->setVar(father);
+			}
+		}
+	}
 }
