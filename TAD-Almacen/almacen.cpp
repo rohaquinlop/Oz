@@ -84,9 +84,11 @@ void  Almacen :: addVal( map<string, string> _m ){
 			if( !isLinked(c1) ){
 				v = o.buildValorOz( o.evalType(c2), c2 );
 				almacen[c1] = v;
+				twoLevelLink = true;
 			}else if( !isLinked(c2) ){
 				v = o.buildValorOz( o.evalType(c1), c1 );
 				almacen[c2] = v;
+				twoLevelLink = true;
 			}else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
 				fail = true;
 			}
