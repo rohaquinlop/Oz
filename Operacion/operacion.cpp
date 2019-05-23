@@ -1,4 +1,10 @@
 #include "operacion.h"
+#include "../TAD-ValorOz/valorOz.h"
+#include "../TAD-ValorOz/valorOzFloat.h"
+#include "../TAD-ValorOz/valorOzInt.h"
+#include "../TAD-ValorOz/valorOzRec.h"
+#include "../TAD-ValorOz/valorOzUnlinked.h"
+#include "../TAD-ValorOz/valorOzVar.h"
 #include <iostream>
 #include <string>
 #include <map>
@@ -72,4 +78,28 @@ string Operacion :: evalType(string s){
 		return "int";
 	}
 	return "float";
+}
+
+ValorOz* Operacion :: buildValorOz(string _type, string _val){
+	/*
+	Esta funcion crea un valor Oz dependiendo del tipo que recibe como parametro
+	de esta forma verifica el tipo, llama el constructor de la clase en especifico,
+	lo construye y lo retorna
+	*/
+	ValorOz* v;
+	std::string::size_type sz;
+	if( _type == "unLinked" ){
+		v = new ValorOzUnlinked(_type, _val);
+	}else if( _type == "int" ){
+		v = new ValorOzInt(_type, stoi(_val) );
+	}else if( _type == "float" ){
+		v = new ValorOzFloat(_type, stod(_val, &sz) );
+	}else if( _type == "var" ){
+		v = new ValorOzVar(_type, _val);
+	}else if( _type == "rec" ){
+		//Falta implementar...
+		//v = new ValorOzRec(_type, _val);
+	}
+
+	return v;
 }

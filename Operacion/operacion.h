@@ -1,8 +1,12 @@
 #ifndef OPERACION_H
 #define OPERACION_H
 
-//Importar las librerias necesarias
-
+#include "../TAD-ValorOz/valorOz.h"
+#include "../TAD-ValorOz/valorOzFloat.h"
+#include "../TAD-ValorOz/valorOzInt.h"
+#include "../TAD-ValorOz/valorOzRec.h"
+#include "../TAD-ValorOz/valorOzUnlinked.h"
+#include "../TAD-ValorOz/valorOzVar.h"
 #include <iostream>
 #include <map>
 
@@ -14,6 +18,7 @@ class Operacion{
         map<string, string> parse(string s);
         bool isInt(string s);
         string evalType(string s);
+        ValorOz* buildValorOz(string _type, string _val);
 };
 
 #endif

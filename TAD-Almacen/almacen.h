@@ -20,7 +20,6 @@ class Almacen{
         map<string, ValorOz*> almacen;
     public:
         Almacen();
-		ValorOz* buildValorOz(string _type, string _val);
         void showInfo();
         void addVal( map<string, string> _m );
         string infoVal(ValorOz* valOz);

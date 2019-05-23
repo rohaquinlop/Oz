@@ -18,30 +18,6 @@ extern bool fail;
 Almacen :: Almacen(){
 }
 
-ValorOz* Almacen :: buildValorOz(string _type, string _val){
-	/*
-	Esta funcion crea un valor Oz dependiendo del tipo que recibe como parametro
-	de esta forma verifica el tipo, llama el constructor de la clase en especifico,
-	lo construye y lo retorna
-	*/
-	ValorOz* v;
-	std::string::size_type sz;
-	if( _type == "unLinked" ){
-		v = new ValorOzUnlinked(_type, _val);
-	}else if( _type == "int" ){
-		v = new ValorOzInt(_type, stoi(_val) );
-	}else if( _type == "float" ){
-		v = new ValorOzFloat(_type, stod(_val, &sz) );
-	}else if( _type == "var" ){
-		v = new ValorOzVar(_type, _val);
-	}else if( _type == "rec" ){
-		//Falta implementar...
-		//v = new ValorOzRec(_type, _val);
-	}
-
-	return v;
-}
-
 void  Almacen :: addVal( map<string, string> _m ){
 	/*
 	Esta funcion recibe como parametro el mapa que retorna la funcion parse
@@ -63,11 +39,11 @@ void  Almacen :: addVal( map<string, string> _m ){
 		*/
 
 		if( !existVar(c1) || !isLinked(c1) ){
-			v = buildValorOz( o.evalType(c2), c2 );
+			v = o.buildValorOz( o.evalType(c2), c2 );
 			almacen[c1] = v;
 		}else{
 			ValorOz* cmp = almacen[c1];
-			v = buildValorOz( o.evalType(c2), c2 );
+			v = o.buildValorOz( o.evalType(c2), c2 );
 			if( infoVal(v) != infoVal(cmp) ){
 				fail = true;
 			}
@@ -75,11 +51,11 @@ void  Almacen :: addVal( map<string, string> _m ){
 
 	}else if( o.evalType(c2) == "var" && o.evalType(c1) != "var" ){
 		if( !existVar(c2) || !isLinked(c2) ){
-			v = buildValorOz( o.evalType(c1), c1 );
+			v = o.buildValorOz( o.evalType(c1), c1 );
 			almacen[c2] = v;
 		}else{
 			ValorOz* cmp = almacen[c2];
-			v = buildValorOz( o.evalType(c1), c1 );
+			v = o.buildValorOz( o.evalType(c1), c1 );
 			if( infoVal(v) != infoVal(cmp) ){
 				fail = true;
 			}
@@ -90,14 +66,14 @@ void  Almacen :: addVal( map<string, string> _m ){
 		string father;
 
 		if( !existVar(c1) && existVar(c2) ){
-			v = buildValorOz( o.evalType(c2), c2 );
+			v = o.buildValorOz( o.evalType(c2), c2 );
 			father = findFather(v);
-			v = buildValorOz( o.evalType(c2), father );
+			v = o.buildValorOz( o.evalType(c2), father );
 			almacen[c1] = v;
 		}else if( existVar(c1) && !existVar(c2) ){
-			v = buildValorOz( o.evalType(c1), c1 );
+			v = o.buildValorOz( o.evalType(c1), c1 );
 			father = findFather(v);
-			v = buildValorOz( o.evalType(c1), father );
+			v = o.buildValorOz( o.evalType(c1), father );
 			almacen[c2] = v;
 		}else if( existVar(c1) && existVar(c2) ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
