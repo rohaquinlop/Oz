@@ -54,13 +54,15 @@ void  Almacen :: addVal( map<string, string> _m ){
 
 	if( o.evalType(c1) == "var" && o.evalType(c2) != "var" ){
 		/*
-		Si ambas campos ingresados son de tipos diferentes, y el primer
+		Si ambos campos ingresados son de tipos diferentes, y el primer
 		campo es una variable y el segundo no es una variable, entonces
 		se verifica si la variable existe en el almacen, en caso de que no
-		entonces asigna la variable con el Valor Oz que se ingreso
+		entonces asigna la variable con el Valor Oz que se ingreso, en caso
+		de que si exista entonces se verifica si el valorOz que se desea ingresar
+		sea el mismo.
 		*/
 
-		if( !existVar(c1) ){
+		if( !existVar(c1) || !isLinked(c1) ){
 			v = buildValorOz( o.evalType(c2), c2 );
 			almacen[c1] = v;
 		}else{
@@ -72,7 +74,7 @@ void  Almacen :: addVal( map<string, string> _m ){
 		}
 
 	}else if( o.evalType(c2) == "var" && o.evalType(c1) != "var" ){
-		if( !existVar(c2) ){
+		if( !existVar(c2) || !isLinked(c2) ){
 			v = buildValorOz( o.evalType(c1), c1 );
 			almacen[c2] = v;
 		}else{
@@ -82,6 +84,8 @@ void  Almacen :: addVal( map<string, string> _m ){
 				fail = true;
 			}
 		}
+	}else if( o.evalType(c1) == "var" && o.evalType(c2) == "var" ){
+		//Aun falta...
 	}
 
 }
