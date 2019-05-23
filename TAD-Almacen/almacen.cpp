@@ -17,6 +17,11 @@ Almacen :: Almacen(){
 }
 
 ValorOz* Almacen :: buildValorOz(string _type, string _val){
+	/*
+	Esta funcion crea un valor Oz dependiendo del tipo que recibe como parametro
+	de esta forma verifica el tipo, llama el constructor de la clase en especifico,
+	lo construye y lo retorna
+	*/
 	ValorOz* v;
 	std::string::size_type sz;
 	if( _type == "unLinked" ){
@@ -37,7 +42,8 @@ ValorOz* Almacen :: buildValorOz(string _type, string _val){
 
 void  Almacen :: addVal( map<string, string> _m ){
 	/*
-	Esta funcion agrega una variable al almacen junto con su respectivo ValorOz
+	Esta funcion recibe como parametro el mapa que retorna la funcion parse
+	y añade la variable al almacen con su respectivo Valor Oz
 	*/
 	string c1 = _m["c1"];
 	string c2 = _m["c2"];
@@ -66,6 +72,9 @@ void  Almacen :: addVal( map<string, string> _m ){
 }
 
 void Almacen :: showInfo(){
+	/*
+	Esta funcion muestra el almacen
+	*/
 	map<string, ValorOz*>::iterator it;
 	string type;
 
@@ -92,6 +101,10 @@ void Almacen :: showInfo(){
 }
 
 string Almacen :: infoVal( ValorOz* valOz ){
+	/*
+	Esta funcion recibe como parametro un puntero de ValorOz y
+	retorna la representacion como string del ValorOz
+	*/
 
 	if( valOz->getType() == "unLinked" ){
 		return ((ValorOzUnlinked*)valOz)->getVal();
@@ -106,14 +119,24 @@ string Almacen :: infoVal( ValorOz* valOz ){
 }
 
 string Almacen :: infoVar( string name ){
+	/*
+	Esta funcion recibe como parametro una variable y consulta el Valor Oz que
+	tiene asociado en el almacen y retorna su representacion como string,
+	para esto usa la funcion infoVal
+	*/
 	ValorOz* aux = almacen[name];
 
 	return infoVal(aux);
 }
 
 bool Almacen :: isLinked(string name){
-	ValorOz* aux = almacen[name];
-	if( (aux->getType()) == "unLinked" ){
+	/*
+	Esta funcion recibe como parametro un string que representa la variable
+	que va a consultar en el almacen y llama la funcion infoVar con parametro
+	el string que recibio y así verifica si el valor que retorna la funcion infoVar
+	pertence a la representacion de los ValorOz sin ligar
+	*/
+	if( infoVar(name) == "_" ){
 		return false;
 	}
 	return true;
@@ -121,8 +144,9 @@ bool Almacen :: isLinked(string name){
 
 string Almacen :: findFather(ValorOz* son){
 	/*
-	El objetivo de esta funcion es encontrar la variable padre para un valor cuando
-	se haga la ligadura con una variable para asi mantener el arbol a 2 niveles.
+	Esta funcion recibe como parametro un puntero a ValorOz, y lo que hace es encontrar el
+	padre de un Valor Oz para asi mantener la ligadura a dos niveles, esta funcion se usa
+	cuando se desea agregar un Valor Oz que va a estar ligado a una variable
 	*/
 	string type = son->getType(), father = infoVal(son);
 
