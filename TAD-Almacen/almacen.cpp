@@ -13,6 +13,8 @@
 
 using namespace std;
 
+extern bool fail;
+
 Almacen :: Almacen(){
 }
 
@@ -58,14 +60,27 @@ void  Almacen :: addVal( map<string, string> _m ){
 		entonces asigna la variable con el Valor Oz que se ingreso
 		*/
 
-		map<string, ValorOz*>::iterator it;
-		it = almacen.find(c1);
-
-		if( it == almacen.end() ){
+		if( !existVar(c1) ){
 			v = buildValorOz( o.evalType(c2), c2 );
 			almacen[c1] = v;
 		}else{
 			ValorOz* cmp = almacen[c1];
+			v = buildValorOz( o.evalType(c2), c2 );
+			if( infoVal(v) != infoVal(cmp) ){
+				fail = true;
+			}
+		}
+
+	}else if( o.evalType(c2) == "var" && o.evalType(c1) != "var" ){
+		if( !existVar(c2) ){
+			v = buildValorOz( o.evalType(c1), c1 );
+			almacen[c2] = v;
+		}else{
+			ValorOz* cmp = almacen[c2];
+			v = buildValorOz( o.evalType(c1), c1 );
+			if( infoVal(v) != infoVal(cmp) ){
+				fail = true;
+			}
 		}
 	}
 
