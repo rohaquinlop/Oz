@@ -18,7 +18,7 @@
   * ~~Obtener Cadena Valor~~
   * Obtener Etiqueta
   * Obtener Lista Campos
-* 	Implementar TAD Almacen
+* Implementar TAD Almacen
   * ~~Crear Almacen~~
   * ~~Imprimir Almacen~~
   * ~~Consultar Variable~~
