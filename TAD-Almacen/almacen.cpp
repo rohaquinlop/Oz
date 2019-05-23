@@ -85,7 +85,27 @@ void  Almacen :: addVal( map<string, string> _m ){
 			}
 		}
 	}else if( o.evalType(c1) == "var" && o.evalType(c2) == "var" ){
-		//Aun falta...
+		//En caso de que ambos campos sean variables, entonces se procede a preguntar si existe
+		//o no existe cada campo
+		string father;
+
+		if( !existVar(c1) && existVar(c2) ){
+			v = buildValorOz( o.evalType(c2), c2 );
+			father = findFather(v);
+			v = buildValorOz( o.evalType(c2), father );
+			almacen[c1] = v;
+		}else if( existVar(c1) && !existVar(c2) ){
+			v = buildValorOz( o.evalType(c1), c1 );
+			father = findFather(v);
+			v = buildValorOz( o.evalType(c1), father );
+			almacen[c2] = v;
+		}else if( existVar(c1) && existVar(c2) ){
+			//En caso de que ambos existan y sean variables entonces se debe saber
+			//Los valores de dichas variables
+			if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
+				fail = true;
+			}
+		}
 	}
 
 }
@@ -96,6 +116,8 @@ void Almacen :: showInfo(){
 	*/
 	map<string, ValorOz*>::iterator it;
 	string type;
+
+	cout << "- - - Estado del Almacen - - -\n";
 
 	for(it = almacen.begin(); it != almacen.end(); it++){
 		cout << it->first << " -> ";
