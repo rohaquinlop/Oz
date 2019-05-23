@@ -1,9 +1,12 @@
-La ligadura ingresada no es permitida: D=B
 - - - Estado del Almacen - - -
 A -> 10
 B -> A
 C -> Y
 D -> Y
+E -> Q
+P -> Q
+Q -> _
+R -> Q
 W -> 12
 X -> 10
 Y -> 11.020000
