@@ -27,6 +27,7 @@ class Almacen{
         string infoVar(string name);
         bool isLinked(string name);
         string findFather(ValorOz* son);
+        bool existVar(string name);
 };
 
 #endif

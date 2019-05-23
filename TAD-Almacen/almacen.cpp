@@ -159,3 +159,20 @@ string Almacen :: findFather(ValorOz* son){
 	return father;
 
 }
+
+bool Almacen :: existVar(string name){
+	/*
+	Esta funcion recibe como parametro un string que representa una variable, la cual
+	se busca en el almacen y retorna true si existe o false en caso contrario
+	*/
+
+	map<string, ValorOz*>::iterator it;
+	it = almacen.find(name);
+
+	if( it != almacen.end() ){
+		return true;
+	}else{
+		return false;
+	}
+
+}
