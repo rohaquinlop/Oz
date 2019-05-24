@@ -11,8 +11,6 @@
 
 using namespace std;
 
-bool fail = false, twoLevelLink = false;
-
 int main(){
 	Operacion operacion;
 	Almacen almacen;
@@ -23,12 +21,12 @@ int main(){
 		m = operacion.parse( line );
 		almacen.addVal( m );
 
-		if( twoLevelLink ){
+		if( almacen.getTwoLevelLink() ){
 			almacen.keepTwoLevel();
-			twoLevelLink = false;
+			almacen.swapTwoLevelLink();
 		}
 
-		if( fail ){
+		if( almacen.getFail() ){
       		cout << "La ligadura ingresada no es permitida: " << line <<"\n";
       		break;
     	}
