@@ -13,13 +13,27 @@
 
 using namespace std;
 
-extern bool fail;
-extern bool twoLevelLink;
-
 Almacen :: Almacen(){
+	this->fail = false;
+	this->twoLevelLink = false;
 }
 
-void  Almacen :: addVal( map<string, string> _m ){
+bool Almacen :: getFail(){
+	return this->fail;
+}
+
+bool Almacen :: getTwoLevelLink(){
+	return this->twoLevelLink;
+}
+void Almacen :: swapFail(){
+	this->fail = !this->fail;
+}
+
+void Almacen :: swapTwoLevelLink(){
+	this->twoLevelLink = !this->twoLevelLink;
+}
+
+void Almacen :: addVal( map<string, string> _m ){
 	/*
 	Esta funcion recibe como parametro el mapa que retorna la funcion parse
 	y añade la variable al almacen con su respectivo Valor Oz
@@ -46,7 +60,7 @@ void  Almacen :: addVal( map<string, string> _m ){
 			ValorOz* cmp = almacen[c1];
 			v = o.buildValorOz( o.evalType(c2), c2 );
 			if( infoVal(v) != infoVal(cmp) ){
-				fail = true;
+				swapFail();
 			}
 		}
 
@@ -58,7 +72,7 @@ void  Almacen :: addVal( map<string, string> _m ){
 			ValorOz* cmp = almacen[c2];
 			v = o.buildValorOz( o.evalType(c1), c1 );
 			if( infoVal(v) != infoVal(cmp) ){
-				fail = true;
+				swapFail();
 			}
 		}
 	}else if( o.evalType(c1) == "var" && o.evalType(c2) == "var" ){
@@ -71,26 +85,26 @@ void  Almacen :: addVal( map<string, string> _m ){
 			father = findFather(v);
 			v = o.buildValorOz( o.evalType(c2), father );
 			almacen[c1] = v;
-			twoLevelLink = true;
+			swapTwoLevelLink();
 		}else if( existVar(c1) && !existVar(c2) ){
 			v = o.buildValorOz( o.evalType(c1), c1 );
 			father = findFather(v);
 			v = o.buildValorOz( o.evalType(c1), father );
 			almacen[c2] = v;
-			twoLevelLink = true;
+			swapTwoLevelLink();
 		}else if( existVar(c1) && existVar(c2) ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
 			//Los valores de dichas variables
 			if( !isLinked(c1) ){
 				v = o.buildValorOz( o.evalType(c2), c2 );
 				almacen[c1] = v;
-				twoLevelLink = true;
+				swapTwoLevelLink();
 			}else if( !isLinked(c2) ){
 				v = o.buildValorOz( o.evalType(c1), c1 );
 				almacen[c2] = v;
-				twoLevelLink = true;
+				swapTwoLevelLink();
 			}else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
-				fail = true;
+				swapFail();
 			}
 		}
 	}
@@ -152,9 +166,8 @@ string Almacen :: infoVar( string name ){
 	tiene asociado en el almacen y retorna su representacion como string,
 	para esto usa la funcion infoVal
 	*/
-	ValorOz* aux = almacen[name];
 
-	return infoVal(aux);
+	return infoVal( almacen[name] );
 }
 
 bool Almacen :: isLinked(string name){
@@ -164,10 +177,7 @@ bool Almacen :: isLinked(string name){
 	el string que recibio y así verifica si el valor que retorna la funcion infoVar
 	pertence a la representacion de los ValorOz sin ligar
 	*/
-	if( infoVar(name) == "_" ){
-		return false;
-	}
-	return true;
+	return (infoVar(name) != "_");
 }
 
 string Almacen :: findFather(ValorOz* son){
@@ -197,11 +207,7 @@ bool Almacen :: existVar(string name){
 	map<string, ValorOz*>::iterator it;
 	it = almacen.find(name);
 
-	if( it != almacen.end() ){
-		return true;
-	}else{
-		return false;
-	}
+	return it != almacen.end();
 
 }
 

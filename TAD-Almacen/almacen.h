@@ -18,16 +18,22 @@ using namespace std;
 class Almacen{
     private:
         map<string, ValorOz*> almacen;
+        bool fail;
+        bool twoLevelLink;
     public:
         Almacen();
         void showInfo();
         void addVal( map<string, string> _m );
-        string infoVal(ValorOz* valOz);
-        string infoVar(string name);
-        bool isLinked(string name);
-        string findFather(ValorOz* son);
-        bool existVar(string name);
+        string infoVal( ValorOz* valOz );
+        string infoVar( string name );
+        bool isLinked( string name );
+        string findFather( ValorOz* son );
+        bool existVar( string name );
         void keepTwoLevel();
+        bool getFail();
+        bool getTwoLevelLink();
+        void swapFail();
+        void swapTwoLevelLink();
 };
 
 #endif
