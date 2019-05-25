@@ -1,1 +1,13 @@
 - - - Estado del Almacen - - -
+A -> H
+B -> H
+C -> H
+D -> H
+F -> H
+G -> H
+H -> 10
+J -> H
+W -> H
+X -> H
+Y -> H
+Z -> H
