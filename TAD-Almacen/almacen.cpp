@@ -103,8 +103,44 @@ void Almacen :: addVal( map<string, string> _m ){
 				v = o.buildValorOz( o.evalType(c1), c1 );
 				almacen[c2] = v;
 				swapTwoLevelLink();
-			}else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
-				swapFail();
+			}else{
+				if( o.evalType( infoVar(c1) ) == "var" && o.evalType( infoVar(c2) ) != "var" ){
+					if( o.evalType( infoVar( infoVar(c1) ) ) == "unLinked" ){
+						v = o.buildValorOz( o.evalType(c2), c2 );
+						almacen[ infoVar(c1) ] = v;
+						swapTwoLevelLink();
+					}else{
+						ValorOz* cmp = almacen[ infoVar( infoVar(c1) ) ];
+						v = o.buildValorOz( o.evalType(c2), c2 );
+						if( infoVal(v) != infoVal(cmp) ){
+							swapFail();
+						}
+					}
+				}else if( o.evalType( infoVar(c2) ) == "var" && o.evalType( infoVar(c1) ) != "var" ){
+					if( o.evalType( infoVar( infoVar(c2) ) ) == "unLinked" ){
+						v = o.buildValorOz( o.evalType(c1), c1 );
+						almacen[ infoVar(c2) ] = v;
+						swapTwoLevelLink();
+					}else{
+						ValorOz* cmp = almacen[ infoVar( infoVar(c2) ) ];
+						v = o.buildValorOz( o.evalType(c1), c1 );
+						if( infoVal(v) != infoVal(cmp) ){
+							swapFail();
+						}
+					}
+				}else if( o.evalType( infoVar(c1) ) == "var" && o.evalType( infoVar(c2) ) == "var" ){
+					if( o.evalType( infoVar( infoVar(c1) ) ) == "unLinked" ){
+						v = o.buildValorOz( o.evalType(c2), c2 );
+						almacen[ infoVar(c1) ] = v;
+						swapTwoLevelLink();
+					}else if( o.evalType( infoVar( infoVar(c2) ) ) == "unLinked" ){
+						v = o.buildValorOz( o.evalType(c1), c1 );
+						almacen[ infoVar(c2) ] = v;
+						swapTwoLevelLink();
+					}else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
+						swapFail();
+					}
+				}
 			}
 		}
 	}
