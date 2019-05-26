@@ -1,3 +1,4 @@
+#include "../TAD-Almacen/almacen.h"
 #include "valorOzRec.h"
 #include "valorOz.h"
 #include <iostream>
@@ -7,7 +8,7 @@
 using namespace std;
 
 //Métodos, set, get, constructores...
-ValorOzRec :: ValorOzRec(string _type, string _name, map<string, ValorOz> _m) : ValorOz(_type){
+ValorOzRec :: ValorOzRec(string _type, string _name, map<string, Almacen> _m) : ValorOz(_type){
 	this->name = _name;
 	this->m = _m;
 }

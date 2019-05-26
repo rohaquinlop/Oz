@@ -1,3 +1,4 @@
+#include "../TAD-Almacen/almacen.h"
 #include "valorOz.h"
 #include <iostream>
 #include <string>
@@ -11,10 +12,10 @@ using namespace std;
 class ValorOzRec : public ValorOz{
     private:
         string name;
-        map<string, ValorOz> m;
+        map<string, Almacen> m;
     public:
         //Constructor de la clase, metodos set y get.
-        ValorOzRec(string _type, string _name, map<string, ValorOz> _m);
+        ValorOzRec(string _type, string _name, map<string, Almacen> _m);
         //string getVal();
 };
 
