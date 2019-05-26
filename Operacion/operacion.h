@@ -19,6 +19,7 @@ class Operacion{
         bool isInt(string s);
         string evalType(string s);
         ValorOz* buildValorOz(string _type, string _val);
+        ValorOz* buildValRec(string _type, map<string, ValorOz*> almacen,string _val);
 };
 
 #endif

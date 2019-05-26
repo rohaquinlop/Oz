@@ -103,3 +103,5 @@ ValorOz* Operacion :: buildValorOz(string _type, string _val){
 
 	return v;
 }
+
+ValorOz* Operacion :: buildValRec(string _type, map<string, ValorOz*> almacen,string _val){}
