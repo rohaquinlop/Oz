@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <list>
 #include <algorithm>
 
 using namespace std;
@@ -309,4 +310,14 @@ void Almacen :: keepTwoLevel(){
 			}
 		}
 	}
+}
+list<string> Almacen :: getListVar(){
+	list<string> vars;
+	map<string, ValorOz*>::iterator it;
+
+	for(it = almacen.begin(); it != almacen.end(); it++){
+		vars.push_back( it->first );
+	}
+
+	return vars;
 }

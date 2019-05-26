@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <list>
 #include <algorithm>
 
 #ifndef ALMACEN_H
@@ -34,6 +35,7 @@ class Almacen{
         bool getTwoLevelLink();
         void swapFail();
         void swapTwoLevelLink();
+        list<string> getListVar();
 };
 
 #endif
