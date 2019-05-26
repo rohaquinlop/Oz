@@ -55,30 +55,45 @@ void Almacen :: addVal( map<string, string> _m ){
 		*/
 
 		if( !existVar(c1) ){
-			v = o.buildValorOz( o.evalType(c2), c2 );
+			if( o.evalType(c2) != "rec" )
+				v = o.buildValorOz( o.evalType(c2), c2 );
+			else
+				v = o.buildValRec( o.evalType(c2), almacen, c2 );
 			almacen[c1] = v;
 		}else if( existVar(c1) && c2 != "_" ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
 			//Los valores de dichas variables
 			if( !isLinked(c1) ){
-				v = o.buildValorOz( o.evalType(c2), c2 );
+				if( o.evalType(c2) != "rec" )
+					v = o.buildValorOz( o.evalType(c2), c2 );
+				else
+					v = o.buildValRec( o.evalType(c2), almacen, c2 );
 				almacen[c1] = v;
 			}else{
 				if( o.evalType( infoVar(c1) ) == "var" ){
 					if( o.evalType( infoVar( infoVar(c1) ) ) == "unLinked" ){
-						v = o.buildValorOz( o.evalType(c2), c2 );
+						if( o.evalType(c2) != "rec" )
+							v = o.buildValorOz( o.evalType(c2), c2 );
+						else
+							v = o.buildValRec( o.evalType(c2), almacen, c2 );
 						almacen[ infoVar(c1) ] = v;
 						swapTwoLevelLink();
 					}else{
 						ValorOz* cmp = almacen[  infoVar(c1) ];
-						v = o.buildValorOz( o.evalType(c2), c2 );
+						if( o.evalType(c2) != "rec" )
+							v = o.buildValorOz( o.evalType(c2), c2 );
+						else
+							v = o.buildValRec( o.evalType(c2), almacen, c2 );
 						if( infoVal(v) != infoVal(cmp) ){
 							swapFail();
 						}
 					}
 				}else{
 					ValorOz* cmp = almacen[ c1 ];
-					v = o.buildValorOz( o.evalType(c2), c2 );
+					if( o.evalType(c2) != "rec" )
+						v = o.buildValorOz( o.evalType(c2), c2 );
+					else
+						v = o.buildValRec( o.evalType(c2), almacen, c2 );
 					if( infoVal(v) != infoVal(cmp) ){
 						swapFail();
 					}
@@ -88,30 +103,45 @@ void Almacen :: addVal( map<string, string> _m ){
 
 	}else if( o.evalType(c2) == "var" && o.evalType(c1) != "var" ){
 		if( !existVar(c2) ){
-			v = o.buildValorOz( o.evalType(c1), c1 );
+			if( o.evalType(c1) != "rec" )
+				v = o.buildValorOz( o.evalType(c1), c1 );
+			else
+				v = o.buildValRec( o.evalType(c1), almacen, c1 );
 			almacen[c2] = v;
 		}else if( existVar(c2) && c1 != "_" ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
 			//Los valores de dichas variables
 			if( !isLinked(c2) ){
-				v = o.buildValorOz( o.evalType(c1), c1 );
+				if( o.evalType(c1) != "rec" )
+					v = o.buildValorOz( o.evalType(c1), c1 );
+				else
+					v = o.buildValRec( o.evalType(c1), almacen, c1 );
 				almacen[c2] = v;
 			}else{
 				if( o.evalType( infoVar(c2) ) == "var" ){
 					if( o.evalType( infoVar( infoVar(c2) ) ) == "unLinked" ){
-						v = o.buildValorOz( o.evalType(c1), c1 );
+						if( o.evalType(c1) != "rec" )
+							v = o.buildValorOz( o.evalType(c1), c1 );
+						else
+							v = o.buildValRec( o.evalType(c1), almacen, c1 );
 						almacen[ infoVar(c2) ] = v;
 						swapTwoLevelLink();
 					}else{
 						ValorOz* cmp = almacen[ infoVar(c2) ];
-						v = o.buildValorOz( o.evalType(c1), c1 );
+						if( o.evalType(c1) != "rec" )
+							v = o.buildValorOz( o.evalType(c1), c1 );
+						else
+							v = o.buildValRec( o.evalType(c1), almacen, c1 );
 						if( infoVal(v) != infoVal(cmp) ){
 							swapFail();
 						}
 					}
 				}else{
 					ValorOz* cmp = almacen[ c2 ];
-					v = o.buildValorOz( o.evalType(c1), c1 );
+					if( o.evalType(c1) != "rec" )
+						v = o.buildValorOz( o.evalType(c1), c1 );
+					else
+						v = o.buildValRec( o.evalType(c1), almacen, c1 );
 					if( infoVal(v) != infoVal(cmp) ){
 						swapFail();
 					}
@@ -188,8 +218,18 @@ void Almacen :: addVal( map<string, string> _m ){
 		}
 	}else if( o.evalType(c1) != "var" && o.evalType(c2) != "var" ){
 		if( c2 != "_" && c1 != "_" ){
-			v = o.buildValorOz( o.evalType(c1), c1 );
-			ValorOz* cmp = o.buildValorOz( o.evalType(c2), c2 );
+			ValorOz* cmp;
+
+			if( o.evalType(c1) != "rec" )
+				v = o.buildValorOz( o.evalType(c1), c1 );
+			else
+				v = o.buildValRec( o.evalType(c1), almacen, c1 );
+
+			if( o.evalType(c2) != "rec" )
+				cmp = o.buildValorOz( o.evalType(c2), c2 );
+			else
+				cmp = o.buildValRec( o.evalType(c2), almacen, c2 );
+
 			if( infoVal(v) != infoVal(cmp) ){
 				swapFail();
 			}
