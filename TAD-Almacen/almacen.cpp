@@ -324,7 +324,7 @@ list<string> Almacen :: getListVar(){
 }
 
 void Almacen :: showVarList(){
-	list<string> vars = almacen.getListVar();
+	list<string> vars = getListVar();
 
 	list<string>::iterator it;
 
