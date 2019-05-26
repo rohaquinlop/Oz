@@ -69,7 +69,7 @@ void Almacen :: addVal( map<string, string> _m ){
 						almacen[ infoVar(c1) ] = v;
 						swapTwoLevelLink();
 					}else{
-						ValorOz* cmp = almacen[ infoVar( infoVar(c1) ) ];
+						ValorOz* cmp = almacen[  infoVar(c1) ];
 						v = o.buildValorOz( o.evalType(c2), c2 );
 						if( infoVal(v) != infoVal(cmp) ){
 							swapFail();
@@ -102,7 +102,7 @@ void Almacen :: addVal( map<string, string> _m ){
 						almacen[ infoVar(c2) ] = v;
 						swapTwoLevelLink();
 					}else{
-						ValorOz* cmp = almacen[ infoVar( infoVar(c2) ) ];
+						ValorOz* cmp = almacen[ infoVar(c2) ];
 						v = o.buildValorOz( o.evalType(c1), c1 );
 						if( infoVal(v) != infoVal(cmp) ){
 							swapFail();
