@@ -16,21 +16,21 @@
 * Implementar TAD ValorOz
   * ~~Crear Valor~~
   * ~~Obtener Cadena Valor~~
-  * Obtener Etiqueta
-  * Obtener Lista Campos
+  * Obtener Etiqueta (Registos)
+  * Obtener Lista Campos (Registros)
 * Implementar TAD Almacen
   * ~~Crear Almacen~~
   * ~~Imprimir Almacen~~
   * ~~Consultar Variable~~
   * ~~Consultar Ligadura variable~~
-  * Modificar Variable
-  * Agregar Variable
-  * Obtener Lista Variables
-  * Unificar Variables
-* Implementar la clase Operaciones
-* Mantener la ligadura de las variables a un solo nivel (Entrada)
+  * ~Modificar Variable~
+  * ~Agregar Variable~
+  * ~Obtener Lista Variables~
+  * ~Unificar Variables~
+* ~Implementar la clase Operaciones~
+* ~Mantener la ligadura de las variables a un solo nivel (Entrada)~
 * Implementar los registros o "records". (**Arbol**)
-* Implementar funcion que verifique el nivel de las variables en el almacen para mantener el árbol en dos niveles.
+* ~Implementar funcion que verifique el nivel de las variables en el almacen para mantener el árbol en dos niveles.~
 
 ## Notas del proyecto
 Ya se implementó nuevamente el TAD ValorOz y la operacion parse que retorna un mapa con cada posicion (izquierda y derecha).
