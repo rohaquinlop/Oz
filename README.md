@@ -33,6 +33,4 @@
 * ~Implementar funcion que verifique el nivel de las variables en el almacen para mantener el árbol en dos niveles.~
 
 ## Notas del proyecto
-Ya se implementó nuevamente el TAD ValorOz y la operacion parse que retorna un mapa con cada posicion (izquierda y derecha).
-Si _ se ligara con algo, se debería continuar.
-Para el caso de prueba que no pasa entonces lo que se hace es cambiar el padre de la variable al estar en _
+El proyecto ya está casi que finalizado, solo faltan los registros.
