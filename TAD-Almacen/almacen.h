@@ -36,6 +36,7 @@ class Almacen{
         void swapFail();
         void swapTwoLevelLink();
         list<string> getListVar();
+        void showVarList();
 };
 
 #endif

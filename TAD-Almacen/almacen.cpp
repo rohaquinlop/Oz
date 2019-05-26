@@ -311,6 +311,7 @@ void Almacen :: keepTwoLevel(){
 		}
 	}
 }
+
 list<string> Almacen :: getListVar(){
 	list<string> vars;
 	map<string, ValorOz*>::iterator it;
@@ -320,4 +321,13 @@ list<string> Almacen :: getListVar(){
 	}
 
 	return vars;
+}
+
+void Almacen :: showVarList(){
+	list<string> vars = almacen.getListVar();
+
+	list<string>::iterator it;
+
+	for(it = vars.begin(); it != vars.end(); it++)
+		cout << *it << "\n";
 }
