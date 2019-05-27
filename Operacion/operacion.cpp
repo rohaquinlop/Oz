@@ -100,7 +100,7 @@ ValorOz* Operacion :: buildValorOz(string _type, string _val){
 }
 
 ValorOz* Operacion :: buildValRec(string _type, string _val){
-	int i;
+	int i, open = 0;
 	string name = "", subVal = "";
 	Almacen a;
 	ValorOz* v;
@@ -114,15 +114,29 @@ ValorOz* Operacion :: buildValRec(string _type, string _val){
 		name += _val[i];
 	}
 
-	for(i; i < _val.size()-1; i++){
-		if( _val[i] == ' ' ){
+	for(i; i < _val.size(); i++){
+		if( _val[i] == ' ' && open == 0){
 			subVals.push(subVal);
 			subVal = "";
 		}else{
-			subVal += _val[i];
+			if( open > 0 ){
+				subVal += _val[i];
+
+				if( _val[i] == ')' )
+					open--;
+
+				if( _val[i] == '(' )
+					open++;
+
+			}else{
+				if( _val[i] == '(' )
+					open++;
+				if( _val[i] != ')' )
+					subVal += _val[i];
+			}
 		}
 	}
-	if(subVal != "")
+	if(subVal.size() >= 3)
 		subVals.push(subVal);
 
 	while( !subVals.empty() ){

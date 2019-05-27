@@ -262,8 +262,10 @@ void Almacen :: showInfo(){
 			cout << it->first << " -> ";
 		if( (it->second)->getType() != "rec" )
 			cout << infoVal( (it->second) ) << "\n";
-		else
+		else{
 			((ValorOzRec*)(it->second))->getVal();
+			cout << "\n";
+		}
 	}
 }
 

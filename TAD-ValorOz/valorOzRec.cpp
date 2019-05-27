@@ -15,7 +15,7 @@ ValorOzRec :: ValorOzRec(string _type, string _name, map<string, ValorOz*> _m) :
 
 void ValorOzRec :: getVal(){
 	if( (this->m).size() == 0 ){
-		cout << this->name << "\n";
+		cout << this->name;
 	}else{
 		cout << this->name << "(";
 		map<string, ValorOz*>::iterator it;

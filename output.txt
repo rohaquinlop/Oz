@@ -1,2 +1,2 @@
 - - - Estado del Almacen - - -
-X -> rec(A:_ B:11.200000 M:f(N:1 ) Y:_ Z:10 )
+X -> rec(F:f(A:11 B:_ G:kkk(L:20 ) ) W:11.220000 Y:10 Z:_ )
