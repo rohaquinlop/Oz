@@ -19,6 +19,16 @@ Almacen :: Almacen(){
 	this->twoLevelLink = false;
 }
 
+Almacen :: Almacen( map<string, ValorOz*> _almacen ){
+	this->fail = false;
+	this->twoLevelLink = false;
+	this->almacen = _almacen;
+}
+
+map<string, ValorOz*> Almacen :: getAlmacen(){
+	return this->almacen;
+}
+
 bool Almacen :: getFail(){
 	return this->fail;
 }
@@ -39,6 +49,7 @@ void Almacen :: addVal( map<string, string> _m ){
 	Esta funcion recibe como parametro el mapa que retorna la funcion parse
 	y añade la variable al almacen con su respectivo Valor Oz
 	*/
+
 	string c1 = _m["c1"];
 	string c2 = _m["c2"];
 	Operacion o;
@@ -57,8 +68,9 @@ void Almacen :: addVal( map<string, string> _m ){
 		if( !existVar(c1) ){
 			if( o.evalType(c2) != "rec" )
 				v = o.buildValorOz( o.evalType(c2), c2 );
-			else
-				v = o.buildValRec( o.evalType(c2), almacen, c2 );
+			else{
+				v = o.buildValRec( o.evalType(c2), c2 );
+			}
 			almacen[c1] = v;
 		}else if( existVar(c1) && c2 != "_" ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
@@ -67,7 +79,7 @@ void Almacen :: addVal( map<string, string> _m ){
 				if( o.evalType(c2) != "rec" )
 					v = o.buildValorOz( o.evalType(c2), c2 );
 				else
-					v = o.buildValRec( o.evalType(c2), almacen, c2 );
+					v = o.buildValRec( o.evalType(c2), c2 );
 				almacen[c1] = v;
 			}else{
 				if( o.evalType( infoVar(c1) ) == "var" ){
@@ -75,7 +87,7 @@ void Almacen :: addVal( map<string, string> _m ){
 						if( o.evalType(c2) != "rec" )
 							v = o.buildValorOz( o.evalType(c2), c2 );
 						else
-							v = o.buildValRec( o.evalType(c2), almacen, c2 );
+							v = o.buildValRec( o.evalType(c2), c2 );
 						almacen[ infoVar(c1) ] = v;
 						swapTwoLevelLink();
 					}else{
@@ -83,7 +95,7 @@ void Almacen :: addVal( map<string, string> _m ){
 						if( o.evalType(c2) != "rec" )
 							v = o.buildValorOz( o.evalType(c2), c2 );
 						else
-							v = o.buildValRec( o.evalType(c2), almacen, c2 );
+							v = o.buildValRec( o.evalType(c2), c2 );
 						if( infoVal(v) != infoVal(cmp) ){
 							swapFail();
 						}
@@ -93,7 +105,7 @@ void Almacen :: addVal( map<string, string> _m ){
 					if( o.evalType(c2) != "rec" )
 						v = o.buildValorOz( o.evalType(c2), c2 );
 					else
-						v = o.buildValRec( o.evalType(c2), almacen, c2 );
+						v = o.buildValRec( o.evalType(c2), c2 );
 					if( infoVal(v) != infoVal(cmp) ){
 						swapFail();
 					}
@@ -106,7 +118,7 @@ void Almacen :: addVal( map<string, string> _m ){
 			if( o.evalType(c1) != "rec" )
 				v = o.buildValorOz( o.evalType(c1), c1 );
 			else
-				v = o.buildValRec( o.evalType(c1), almacen, c1 );
+				v = o.buildValRec( o.evalType(c1), c1 );
 			almacen[c2] = v;
 		}else if( existVar(c2) && c1 != "_" ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
@@ -115,7 +127,7 @@ void Almacen :: addVal( map<string, string> _m ){
 				if( o.evalType(c1) != "rec" )
 					v = o.buildValorOz( o.evalType(c1), c1 );
 				else
-					v = o.buildValRec( o.evalType(c1), almacen, c1 );
+					v = o.buildValRec( o.evalType(c1), c1 );
 				almacen[c2] = v;
 			}else{
 				if( o.evalType( infoVar(c2) ) == "var" ){
@@ -123,7 +135,7 @@ void Almacen :: addVal( map<string, string> _m ){
 						if( o.evalType(c1) != "rec" )
 							v = o.buildValorOz( o.evalType(c1), c1 );
 						else
-							v = o.buildValRec( o.evalType(c1), almacen, c1 );
+							v = o.buildValRec( o.evalType(c1), c1 );
 						almacen[ infoVar(c2) ] = v;
 						swapTwoLevelLink();
 					}else{
@@ -131,7 +143,7 @@ void Almacen :: addVal( map<string, string> _m ){
 						if( o.evalType(c1) != "rec" )
 							v = o.buildValorOz( o.evalType(c1), c1 );
 						else
-							v = o.buildValRec( o.evalType(c1), almacen, c1 );
+							v = o.buildValRec( o.evalType(c1), c1 );
 						if( infoVal(v) != infoVal(cmp) ){
 							swapFail();
 						}
@@ -141,7 +153,7 @@ void Almacen :: addVal( map<string, string> _m ){
 					if( o.evalType(c1) != "rec" )
 						v = o.buildValorOz( o.evalType(c1), c1 );
 					else
-						v = o.buildValRec( o.evalType(c1), almacen, c1 );
+						v = o.buildValRec( o.evalType(c1), c1 );
 					if( infoVal(v) != infoVal(cmp) ){
 						swapFail();
 					}
@@ -223,12 +235,12 @@ void Almacen :: addVal( map<string, string> _m ){
 			if( o.evalType(c1) != "rec" )
 				v = o.buildValorOz( o.evalType(c1), c1 );
 			else
-				v = o.buildValRec( o.evalType(c1), almacen, c1 );
+				v = o.buildValRec( o.evalType(c1), c1 );
 
 			if( o.evalType(c2) != "rec" )
 				cmp = o.buildValorOz( o.evalType(c2), c2 );
 			else
-				cmp = o.buildValRec( o.evalType(c2), almacen, c2 );
+				cmp = o.buildValRec( o.evalType(c2), c2 );
 
 			if( infoVal(v) != infoVal(cmp) ){
 				swapFail();
@@ -247,24 +259,11 @@ void Almacen :: showInfo(){
 	cout << "- - - Estado del Almacen - - -\n";
 
 	for(it = almacen.begin(); it != almacen.end(); it++){
-		cout << it->first << " -> ";
-		type = (it->second)->getType();
-
-		if( type == "unLinked" ){
+			cout << it->first << " -> ";
+		if( (it->second)->getType() != "rec" )
 			cout << infoVal( (it->second) ) << "\n";
-		}else if( type == "int" ){
-			cout << infoVal( (it->second) ) << "\n";
-		}else if( type == "float" ){
-			cout << infoVal( (it->second) ) << "\n";
-		}else if( type == "var" ){
-			cout << infoVal( (it->second) ) << "\n";
-		}
-		/*
-		//Los registros aun no están implementados
-		else if( (it->second)->getType() == "rec" ){
-			cout << ((ValorOzRec*)(it->second))->getVal() << "\n";
-		}
-		*/
+		else
+			((ValorOzRec*)(it->second))->getVal();
 	}
 }
 
@@ -276,11 +275,14 @@ string Almacen :: infoVal( ValorOz* valOz ){
 
 	if( valOz->getType() == "unLinked" ){
 		return ((ValorOzUnlinked*)valOz)->getVal();
-	}else if( valOz->getType() == "int" ){
+	}
+	else if( valOz->getType() == "int" ){
 		return ((ValorOzInt*)valOz)->getVal();
-	}else if( valOz->getType() == "float" ){
+	}
+	else if( valOz->getType() == "float" ){
 		return ((ValorOzFloat*)valOz)->getVal();
-	}else if( valOz->getType() == "var" ){
+	}
+	else if( valOz->getType() == "var" ){
 		return ((ValorOzVar*)valOz)->getVal();
 	}
 

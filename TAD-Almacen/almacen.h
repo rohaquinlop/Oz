@@ -23,6 +23,8 @@ class Almacen{
         bool twoLevelLink;
     public:
         Almacen();
+        Almacen( map<string, ValorOz*> _almacen );
+        map<string, ValorOz*> getAlmacen();
         void showInfo();
         void addVal( map<string, string> _m );
         string infoVal( ValorOz* valOz );

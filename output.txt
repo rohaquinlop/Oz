@@ -1,13 +1,2 @@
 - - - Estado del Almacen - - -
-A -> H
-B -> H
-C -> H
-D -> H
-F -> H
-G -> H
-H -> 10
-J -> H
-W -> H
-X -> H
-Y -> H
-Z -> H
+X -> rec(A:_ B:11.200000 M:f(N:1 ) Y:_ Z:10 )

@@ -15,11 +15,11 @@ using namespace std;
 class Operacion{
     public:
         //Metodos
-        map<string, string> parse(string s);
-        bool isInt(string s);
-        string evalType(string s);
-        ValorOz* buildValorOz(string _type, string _val);
-        ValorOz* buildValRec(string _type, map<string, ValorOz*> almacen,string _val);
+        map<string, string> parse( string s );
+        bool isInt( string s );
+        string evalType( string s );
+        ValorOz* buildValorOz( string _type, string _val );
+        ValorOz* buildValRec( string _type,string _val );
 };
 
 #endif

@@ -5,8 +5,10 @@
 #include "../TAD-ValorOz/valorOzRec.h"
 #include "../TAD-ValorOz/valorOzUnlinked.h"
 #include "../TAD-ValorOz/valorOzVar.h"
+#include "../TAD-Almacen/almacen.h"
 #include <iostream>
 #include <string>
+#include <stack>
 #include <map>
 #include <algorithm>
 
@@ -23,18 +25,16 @@ map<string, string> Operacion :: parse(string s){
 	map<string, string> fields;
 	string c1 = "", c2 = "";
 	int i;
+	bool found = false;
 
 	for(i = 0; i < s.size(); i++){
-		if( s[i] == '=' ){
-			i++;
-			break;
-		}else{
+		if( (s[i] == '=' || s[i] == ':') && !found ){
+			found = true;
+		}else if( found ){
+			c2 += s[i];
+		}else if( !found ){
 			c1 += s[i];
 		}
-	}
-
-	for(i; i < s.size(); i++){
-		c2 += s[i];
 	}
 
 	fields["c1"] = c1;
@@ -42,6 +42,7 @@ map<string, string> Operacion :: parse(string s){
 
 	return fields;
 }
+
 
 bool Operacion :: isInt(string s){
 	/*
@@ -52,17 +53,14 @@ bool Operacion :: isInt(string s){
 	string::iterator it;
 	it = find(s.begin(), s.end(), '.');
 
-	if ( it != s.end() )
-		return false;
-
-	return true;
+	return it == s.end();
 }
 
 string Operacion :: evalType(string s){
 	/*
 	Funcion que retorna el tipo de variable que se ingreso
     Tipos: record, var, int, float, unLinked
-      registro está escrito en minuscula.
+      registros y campos están escritos en minusculas.
       variable está escrita en MAYUSCULA.
       int no tiene un '.'
       float tiene un '.'
@@ -96,12 +94,44 @@ ValorOz* Operacion :: buildValorOz(string _type, string _val){
 		v = new ValorOzFloat(_type, stod(_val, &sz) );
 	}else if( _type == "var" ){
 		v = new ValorOzVar(_type, _val);
-	}else if( _type == "rec" ){
-		//Falta implementar...
-		//v = new ValorOzRec(_type, _val);
 	}
 
 	return v;
 }
 
-ValorOz* Operacion :: buildValRec(string _type, map<string, ValorOz*> almacen,string _val){}
+ValorOz* Operacion :: buildValRec(string _type, string _val){
+	int i;
+	string name = "", subVal = "";
+	Almacen a;
+	ValorOz* v;
+	stack<string> subVals;
+
+	for(i = 0; i < _val.size(); i++){
+		if( _val[i] == '(' ){
+			i++;
+			break;
+		}
+		name += _val[i];
+	}
+
+	for(i; i < _val.size()-1; i++){
+		if( _val[i] == ' ' ){
+			subVals.push(subVal);
+			subVal = "";
+		}else{
+			subVal += _val[i];
+		}
+	}
+	if(subVal != "")
+		subVals.push(subVal);
+
+	while( !subVals.empty() ){
+		subVal = subVals.top();
+		subVals.pop();
+		a.addVal( parse( subVal ) );
+	}
+
+	v = new ValorOzRec( _type, name, a.getAlmacen() );
+	return v;
+
+}
