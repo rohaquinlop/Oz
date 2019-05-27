@@ -29,7 +29,7 @@
   * ~Unificar Variables~
 * ~Implementar la clase Operaciones~
 * ~Mantener la ligadura de las variables a un solo nivel (Entrada)~
-* Implementar los registros o "records". (**Arbol**)
+* ~~Implementar los registros o "records". (**Arbol**)~~
 * ~Implementar funcion que verifique el nivel de las variables en el almacen para mantener el árbol en dos niveles.~
 
 ## Notas del proyecto
