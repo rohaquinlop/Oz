@@ -3,6 +3,7 @@
 #include "../Operacion/operacion.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <map>
 
 using namespace std;
@@ -13,33 +14,41 @@ ValorOzRec :: ValorOzRec(string _type, string _name, map<string, ValorOz*> _m) :
 	this->m = _m;
 }
 
-void ValorOzRec :: getVal(){
+string ValorOzRec :: getVal(){
+	stringstream ss;
 	if( (this->m).size() == 0 ){
-		cout << this->name;
+		ss << this->name;
+		return ss.str();
 	}else{
-		cout << this->name << "(";
+		int count = 0;
+		ss << this->name << "(";
 		map<string, ValorOz*>::iterator it;
 		
 		for( it = (this->m).begin(); it != (this->m).end(); it++ ){
-			cout << it->first << ":";
+			count++;
+			ss << it->first << ":";
 			if( (it->second)->getType() != "rec" ){
 				if( (it->second)->getType() == "unLinked" ){
-					cout << ((ValorOzUnlinked*)(it->second))->getVal();
+					ss << ((ValorOzUnlinked*)(it->second))->getVal();
 				}
 				else if( (it->second)->getType() == "int" ){
-					cout << ((ValorOzInt*)(it->second))->getVal();
+					ss << ((ValorOzInt*)(it->second))->getVal();
 				}
 				else if( (it->second)->getType() == "float" ){
-					cout << ((ValorOzFloat*)(it->second))->getVal();
+					ss << ((ValorOzFloat*)(it->second))->getVal();
 				}
 				else if( (it->second)->getType() == "var" ){
-					cout << ((ValorOzVar*)(it->second))->getVal();
+					ss << ((ValorOzVar*)(it->second))->getVal();
 				}
 			}else
-				((ValorOzRec*)(it->second))->getVal();
-			cout << " ";
+				ss << ((ValorOzRec*)(it->second))->getVal();
+			if( count < (this->m).size() ){
+				ss << " ";
+			}
 		}
-		cout << ")";
+		ss << ")";
 	}
+
+	return ss.str();
 
 }

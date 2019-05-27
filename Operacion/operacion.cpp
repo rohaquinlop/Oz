@@ -28,7 +28,7 @@ map<string, string> Operacion :: parse(string s){
 	bool found = false;
 
 	for(i = 0; i < s.size(); i++){
-		if( (s[i] == '=' || s[i] == ':') && !found ){
+		if( s[i] == '=' && !found ){
 			found = true;
 		}else if( found ){
 			c2 += s[i];
@@ -43,6 +43,33 @@ map<string, string> Operacion :: parse(string s){
 	return fields;
 }
 
+map<string, string> Operacion :: parseRec(string s){
+	/*
+	Operacion que evalua un string que ingresa, y determina
+	cada campo que hay en el string.
+	Ejemplo:
+		- X=10 | ---> | c1 = X y c2 = 10
+	*/
+	map<string, string> fields;
+	string c1 = "", c2 = "";
+	int i;
+	bool found = false;
+
+	for(i = 0; i < s.size(); i++){
+		if( s[i] == ':' && !found ){
+			found = true;
+		}else if( found ){
+			c2 += s[i];
+		}else if( !found ){
+			c1 += s[i];
+		}
+	}
+
+	fields["c1"] = c1;
+	fields["c2"] = c2;
+
+	return fields;
+}
 
 bool Operacion :: isInt(string s){
 	/*
@@ -142,7 +169,7 @@ ValorOz* Operacion :: buildValRec(string _type, string _val){
 	while( !subVals.empty() ){
 		subVal = subVals.top();
 		subVals.pop();
-		a.addVal( parse( subVal ) );
+		a.addVal( parseRec( subVal ) );
 	}
 
 	v = new ValorOzRec( _type, name, a.getAlmacen() );

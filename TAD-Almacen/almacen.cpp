@@ -259,13 +259,7 @@ void Almacen :: showInfo(){
 	cout << "- - - Estado del Almacen - - -\n";
 
 	for(it = almacen.begin(); it != almacen.end(); it++){
-			cout << it->first << " -> ";
-		if( (it->second)->getType() != "rec" )
-			cout << infoVal( (it->second) ) << "\n";
-		else{
-			((ValorOzRec*)(it->second))->getVal();
-			cout << "\n";
-		}
+			cout << it->first << " -> " << infoVal( (it->second) ) << "\n";
 	}
 }
 
@@ -286,6 +280,9 @@ string Almacen :: infoVal( ValorOz* valOz ){
 	}
 	else if( valOz->getType() == "var" ){
 		return ((ValorOzVar*)valOz)->getVal();
+	}
+	else if( valOz->getType() == "rec" ){
+		return ((ValorOzRec*)valOz)->getVal();
 	}
 
 }

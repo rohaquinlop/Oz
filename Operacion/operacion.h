@@ -16,6 +16,7 @@ class Operacion{
     public:
         //Metodos
         map<string, string> parse( string s );
+        map<string, string> parseRec(string s);
         bool isInt( string s );
         string evalType( string s );
         ValorOz* buildValorOz( string _type, string _val );
