@@ -55,7 +55,7 @@ void Almacen :: addVal( map<string, string> _m ){
 	Operacion o;
 	ValorOz* v;
 
-	if( o.evalType(c1) == "var" && o.evalType(c2) != "var" ){
+	if( (o.evalType(c1) == "var" || o.evalType(c1) == "rec") && o.evalType(c2) != "var" ){
 		/*
 		Si ambos campos ingresados son de tipos diferentes, y el primer
 		campo es una variable y el segundo no es una variable, entonces
