@@ -21,6 +21,7 @@ class Operacion{
         string evalType( string s );
         ValorOz* buildValorOz( string _type, string _val );
         ValorOz* buildValRec( string _type,string _val );
+        bool compareRec( ValorOz* v, ValorOz* cmp );
 };
 
 #endif

@@ -55,7 +55,7 @@ void Almacen :: addVal( map<string, string> _m ){
 	Operacion o;
 	ValorOz* v;
 
-	if( (o.evalType(c1) == "var" || o.evalType(c1) == "rec") && o.evalType(c2) != "var" ){
+	if( (o.evalType(c1) == "var" || o.evalType(c1) == "camp") && o.evalType(c2) != "var" ){
 		/*
 		Si ambos campos ingresados son de tipos diferentes, y el primer
 		campo es una variable y el segundo no es una variable, entonces
@@ -72,7 +72,8 @@ void Almacen :: addVal( map<string, string> _m ){
 				v = o.buildValRec( o.evalType(c2), c2 );
 			}
 			almacen[c1] = v;
-		}else if( existVar(c1) && c2 != "_" ){
+		}
+		else if( existVar(c1) && c2 != "_" ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
 			//Los valores de dichas variables
 			if( !isLinked(c1) ){
@@ -113,14 +114,16 @@ void Almacen :: addVal( map<string, string> _m ){
 			}
 		}
 
-	}else if( o.evalType(c2) == "var" && o.evalType(c1) != "var" ){
+	}
+	else if( o.evalType(c2) == "var" && (o.evalType(c1) != "var" && o.evalType(c1) != "camp") ){
 		if( !existVar(c2) ){
 			if( o.evalType(c1) != "rec" )
 				v = o.buildValorOz( o.evalType(c1), c1 );
 			else
 				v = o.buildValRec( o.evalType(c1), c1 );
 			almacen[c2] = v;
-		}else if( existVar(c2) && c1 != "_" ){
+		}
+		else if( existVar(c2) && c1 != "_" ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
 			//Los valores de dichas variables
 			if( !isLinked(c2) ){
@@ -160,31 +163,39 @@ void Almacen :: addVal( map<string, string> _m ){
 				}
 			}
 		}
-	}else if( o.evalType(c1) == "var" && o.evalType(c2) == "var" ){
+	}
+	else if( (o.evalType(c1) == "var" || o.evalType(c1) == "camp") && o.evalType(c2) == "var" ){
 		//En caso de que ambos campos sean variables, entonces se procede a preguntar si existe
 		//o no existe cada campo
 		string father;
 
-		if( !existVar(c1) && existVar(c2) ){
+		if( !existVar(c1) && o.evalType(c1) == "camp" ){
+			v = o.buildValorOz( o.evalType(c2), c2 );
+			almacen[c1] = v;
+		}
+		else if( !existVar(c1) && existVar(c2) ){
 			v = o.buildValorOz( o.evalType(c2), c2 );
 			father = findFather(v);
 			v = o.buildValorOz( o.evalType(c2), father );
 			almacen[c1] = v;
 			swapTwoLevelLink();
-		}else if( existVar(c1) && !existVar(c2) ){
+		}
+		else if( existVar(c1) && !existVar(c2) ){
 			v = o.buildValorOz( o.evalType(c1), c1 );
 			father = findFather(v);
 			v = o.buildValorOz( o.evalType(c1), father );
 			almacen[c2] = v;
 			swapTwoLevelLink();
-		}else if( existVar(c1) && existVar(c2) ){
+		}
+		else if( existVar(c1) && existVar(c2) ){
 			//En caso de que ambos existan y sean variables entonces se debe saber
 			//Los valores de dichas variables
 			if( !isLinked(c1) ){
 				v = o.buildValorOz( o.evalType(c2), c2 );
 				almacen[c1] = v;
 				swapTwoLevelLink();
-			}else if( !isLinked(c2) ){
+			}
+			else if( !isLinked(c2) ){
 				v = o.buildValorOz( o.evalType(c1), c1 );
 				almacen[c2] = v;
 				swapTwoLevelLink();
@@ -201,7 +212,8 @@ void Almacen :: addVal( map<string, string> _m ){
 							swapFail();
 						}
 					}
-				}else if( o.evalType( infoVar(c2) ) == "var" && o.evalType( infoVar(c1) ) != "var" ){
+				}
+				else if( o.evalType( infoVar(c2) ) == "var" && o.evalType( infoVar(c1) ) != "var" ){
 					if( o.evalType( infoVar( infoVar(c2) ) ) == "unLinked" ){
 						v = o.buildValorOz( o.evalType(c1), c1 );
 						almacen[ infoVar(c2) ] = v;
@@ -213,17 +225,35 @@ void Almacen :: addVal( map<string, string> _m ){
 							swapFail();
 						}
 					}
-				}else if( o.evalType( infoVar(c1) ) == "var" && o.evalType( infoVar(c2) ) == "var" ){
+				}
+				else if( o.evalType( infoVar(c1) ) == "var" && o.evalType( infoVar(c2) ) == "var" ){
 					if( o.evalType( infoVar( infoVar(c1) ) ) == "unLinked" ){
 						v = o.buildValorOz( o.evalType(c2), c2 );
 						almacen[ infoVar(c1) ] = v;
 						swapTwoLevelLink();
-					}else if( o.evalType( infoVar( infoVar(c2) ) ) == "unLinked" ){
+					}
+					else if( o.evalType( infoVar( infoVar(c2) ) ) == "unLinked" ){
 						v = o.buildValorOz( o.evalType(c1), c1 );
 						almacen[ infoVar(c2) ] = v;
 						swapTwoLevelLink();
-					}else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
+					}
+					else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
 						swapFail();
+					}
+				}else{
+					if( o.evalType( infoVar(c1) ) == "rec" && o.evalType( infoVar(c1) ) != "rec" ){
+						swapFail();
+					}
+					else if( o.evalType( infoVar(c1) ) != "rec" && o.evalType( infoVar(c1) ) == "rec" ){
+						swapFail();
+					}
+					else if( o.evalType( infoVar(c1) ) == "rec" && o.evalType( infoVar(c1) ) == "rec" ){
+						v = almacen[ c1 ];
+						ValorOz* cmp = almacen[ c2 ];
+						if( !o.compareRec(v, cmp) )
+							swapFail();
+						
+							//llamar a la funcion que hace las ligaduras con los registros
 					}
 				}
 			}

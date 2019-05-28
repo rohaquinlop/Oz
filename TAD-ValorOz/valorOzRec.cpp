@@ -52,3 +52,29 @@ string ValorOzRec :: getVal(){
 	return ss.str();
 
 }
+
+string ValorOzRec :: getCamps(){
+	stringstream ss;
+	if( (this->m).size() == 0 ){
+		ss << this->name << "()";
+		return ss.str();
+	}else{
+		int count = 0;
+		ss << this->name << "(";
+		map<string, ValorOz*>::iterator it;
+		
+		for( it = (this->m).begin(); it != (this->m).end(); it++ ){
+			count++;
+			ss << it->first;
+			if( (it->second)->getType() == "rec" )
+				ss << ((ValorOzRec*)(it->second))->getCamps();
+
+			if( count < (this->m).size() )
+				ss << " ";
+		}
+		ss << ")";
+	}
+
+	return ss.str();
+
+}

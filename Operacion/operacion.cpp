@@ -98,7 +98,12 @@ string Operacion :: evalType(string s){
 	}else if( s[0] >= 'A' && s[0] <= 'Z' ){
 		return "var";
 	}else if( s[0] >= 'a' && s[0] <= 'z' ){
-		return "rec";
+		for(int i = 0 ; i < s.size(); i++){
+			if( s[i] == '(' ){
+				return "rec";
+			}
+		}
+		return "camp";
 	}else if( isInt(s) ){
 		return "int";
 	}
@@ -175,4 +180,8 @@ ValorOz* Operacion :: buildValRec(string _type, string _val){
 	v = new ValorOzRec( _type, name, a.getAlmacen() );
 	return v;
 
+}
+
+bool Operacion :: compareRec( ValorOz* v, ValorOz* cmp ){
+	return ((ValorOzRec*)v)->getCamps() == ((ValorOzRec*)cmp)->getCamps();
 }

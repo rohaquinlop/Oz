@@ -16,6 +16,7 @@ class ValorOzRec : public ValorOz{
         //Constructor de la clase, metodos set y get.
         ValorOzRec(string _type, string _name, map<string, ValorOz*> _m);
         string getVal();
+        string getCamps();
 };
 
 #endif

@@ -1,13 +1,6 @@
+La ligadura ingresada no es permitida: Z=W
 - - - Estado del Almacen - - -
-A -> H
-B -> H
-C -> H
-D -> H
-F -> H
-G -> H
-H -> 10
-J -> H
-W -> H
-X -> H
-Y -> H
-Z -> H
+W -> X
+X -> registro(c1:f(c2:10 c3:algo(c4:_ c5:20.100000 c6:ios(c7:_ c8:linux(c9:_)))) c10:20)
+Y -> rec
+Z -> Y
