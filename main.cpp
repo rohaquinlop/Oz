@@ -19,7 +19,7 @@ int main(){
 
 	while( getline(cin, line) ){
 		m = operacion.parse( line );
-		almacen.addVal( m );
+		almacen.addVal( m["c1"], m["c2"] );
 
 		if( almacen.getTwoLevelLink() ){
 			almacen.keepTwoLevel();
@@ -31,7 +31,7 @@ int main(){
       		break;
     	}
 	}
-	
+
 	almacen.showInfo();
 
     return 0;

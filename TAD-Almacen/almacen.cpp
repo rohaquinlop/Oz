@@ -44,14 +44,12 @@ void Almacen :: swapTwoLevelLink(){
 	this->twoLevelLink = !this->twoLevelLink;
 }
 
-void Almacen :: addVal( map<string, string> _m ){
+void Almacen :: addVal( string c1, string c2 ){
 	/*
 	Esta funcion recibe como parametro el mapa que retorna la funcion parse
 	y añade la variable al almacen con su respectivo Valor Oz
 	*/
 
-	string c1 = _m["c1"];
-	string c2 = _m["c2"];
 	Operacion o;
 	ValorOz* v;
 
@@ -253,10 +251,10 @@ void Almacen :: addVal( map<string, string> _m ){
 						if( !o.compareRec(v, cmp) )
 							swapFail();
 						else
-							if ( !linkRec(v, cmp) )
+							if ( !linkRec(v, cmp) ){
 								swapFail();
-							else
-								cout << "La ligadura de los registros no es posible" << "\n";
+								cout << "La ligadura de los registros no es posible " << infoVal(v) << " " << infoVal(cmp) <<"\n";
+							}
 					}
 				}
 			}
@@ -413,16 +411,26 @@ bool Almacen :: linkRec( ValorOz* v1, ValorOz* v2 ){
 	map<string, ValorOz*> recAlmacen2 = ((ValorOzRec*)v2)->getMap();
 	map<string, string> aux;
 	string c1, c2;
+	Operacion o;
 
 	for(it1 = recAlmacen1.begin(), it2 = recAlmacen2.begin() ; it1 != recAlmacen1.end(); it1++, it2++){
 		c1 = infoVal( it1->second );
 		c2 = infoVal( it2->second );
-		aux["c1"] = c1;
-		aux["c2"] = c2;
-		addVal(aux);
+
+		if( o.evalType(c1) == "rec" && o.evalType(c2) == "rec" ){
+			linkRec( it1->second, it2->second );
+		}else{
+			addVal(c1, c2);
+		}
 
 		if( getFail() )
 			return false;
+
+		if( getTwoLevelLink() ){
+			keepTwoLevel();
+			swapTwoLevelLink();
+		}
+
 	}
 	return true;
 }

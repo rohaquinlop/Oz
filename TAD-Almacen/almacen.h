@@ -26,7 +26,7 @@ class Almacen{
         Almacen( map<string, ValorOz*> _almacen );
         map<string, ValorOz*> getAlmacen();
         void showInfo();
-        void addVal( map<string, string> _m );
+        void addVal( string c1, string c2 );
         string infoVal( ValorOz* valOz );
         string infoVar( string name );
         bool isLinked( string name );

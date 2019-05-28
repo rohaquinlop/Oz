@@ -137,6 +137,7 @@ ValorOz* Operacion :: buildValRec(string _type, string _val){
 	Almacen a;
 	ValorOz* v;
 	stack<string> subVals;
+	map<string, string> m;
 
 	for(i = 0; i < _val.size(); i++){
 		if( _val[i] == '(' ){
@@ -174,7 +175,8 @@ ValorOz* Operacion :: buildValRec(string _type, string _val){
 	while( !subVals.empty() ){
 		subVal = subVals.top();
 		subVals.pop();
-		a.addVal( parseRec( subVal ) );
+		m = parseRec( subVal );
+		a.addVal( m["c1"], m["c2"] );
 	}
 
 	v = new ValorOzRec( _type, name, a.getAlmacen() );
