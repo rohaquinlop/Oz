@@ -78,3 +78,7 @@ string ValorOzRec :: getCamps(){
 	return ss.str();
 
 }
+
+map<string, ValorOz*> ValorOzRec :: getMap(){
+	return this->m;
+}

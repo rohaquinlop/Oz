@@ -252,8 +252,11 @@ void Almacen :: addVal( map<string, string> _m ){
 						ValorOz* cmp = almacen[ c2 ];
 						if( !o.compareRec(v, cmp) )
 							swapFail();
-						
-							//llamar a la funcion que hace las ligaduras con los registros
+						else
+							if ( !linkRec(v, cmp) )
+								swapFail();
+							else
+								cout << "La ligadura de los registros no es posible" << "\n";
 					}
 				}
 			}
@@ -401,4 +404,25 @@ void Almacen :: showVarList(){
 
 	for(it = vars.begin(); it != vars.end(); it++)
 		cout << *it << "\n";
+}
+
+bool Almacen :: linkRec( ValorOz* v1, ValorOz* v2 ){
+	map<string, ValorOz*>::iterator it1;
+	map<string, ValorOz*>::iterator it2;
+	map<string, ValorOz*> recAlmacen1 = ((ValorOzRec*)v1)->getMap();
+	map<string, ValorOz*> recAlmacen2 = ((ValorOzRec*)v2)->getMap();
+	map<string, string> aux;
+	string c1, c2;
+
+	for(it1 = recAlmacen1.begin(), it2 = recAlmacen2.begin() ; it1 != recAlmacen1.end(); it1++, it2++){
+		c1 = infoVal( it1->second );
+		c2 = infoVal( it2->second );
+		aux["c1"] = c1;
+		aux["c2"] = c2;
+		addVal(aux);
+
+		if( getFail() )
+			return false;
+	}
+	return true;
 }

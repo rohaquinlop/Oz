@@ -17,6 +17,7 @@ class ValorOzRec : public ValorOz{
         ValorOzRec(string _type, string _name, map<string, ValorOz*> _m);
         string getVal();
         string getCamps();
+        map<string, ValorOz*> getMap();
 };
 
 #endif

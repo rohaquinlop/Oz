@@ -39,6 +39,7 @@ class Almacen{
         void swapTwoLevelLink();
         list<string> getListVar();
         void showVarList();
+        bool linkRec( ValorOz* v1, ValorOz* v2 );
 };
 
 #endif

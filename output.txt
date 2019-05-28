@@ -1,6 +1,11 @@
-La ligadura ingresada no es permitida: Z=W
+La ligadura de los registros no es posible
 - - - Estado del Almacen - - -
-W -> X
-X -> registro(c1:f(c2:10 c3:algo(c4:_ c5:20.100000 c6:ios(c7:_ c8:linux(c9:_)))) c10:20)
-Y -> rec
-Z -> Y
+M -> 12
+N -> 20
+R -> rec(c1:X c2:20 c3:M)
+S -> 10
+T -> S
+W -> Z
+X -> S
+Y -> S
+Z -> rec(c1:Y c2:N c3:12)
