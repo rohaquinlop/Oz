@@ -3,6 +3,6 @@ A -> 10
 B -> _
 M -> 20.100000
 W -> _
-X -> registro(c1:f(c2:10 c3:algo(c4:_ c5:20.100000 c6:ios(c7:_ c8:linux(c9:_)))) c10:20)
-Y -> registro(c1:f(c2:A c3:algo(c4:B c5:M c6:ios(c7:_ c8:linux(c9:A)))) c10:Z)
+X -> _
+Y -> _
 Z -> 20

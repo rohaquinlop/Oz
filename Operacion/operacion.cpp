@@ -76,7 +76,7 @@ bool Operacion :: isInt(string s){
 	Operacion que retorna true si el string ingresado es un entero
 	o false si es un numero flotante.
 	*/
-	
+
 	string::iterator it;
 	it = find(s.begin(), s.end(), '.');
 

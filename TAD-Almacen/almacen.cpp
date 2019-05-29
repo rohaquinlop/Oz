@@ -273,9 +273,17 @@ void Almacen :: addVal( string c1, string c2 ){
 			else
 				cmp = o.buildValRec( o.evalType(c2), c2 );
 
-			if( infoVal(v) != infoVal(cmp) ){
-				swapFail();
-			}
+				if( o.evalType(c1) == "rec" && o.evalType(c2) == "rec" ){
+					if( !o.compareRec(v, cmp) )
+						swapFail();
+					else
+						if ( !linkRec(v, cmp) ){
+							swapFail();
+							cout << "La ligadura de los registros no es posible " << infoVal(v) << " " << infoVal(cmp) <<"\n";
+						}
+				}else
+					if( infoVal(v) != infoVal(cmp) )
+						swapFail();
 		}
 	}
 }
