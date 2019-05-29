@@ -235,6 +235,17 @@ void Almacen :: addVal( string c1, string c2 ){
 						almacen[ infoVar(c2) ] = v;
 						swapTwoLevelLink();
 					}
+					else if( o.evalType( infoVar( infoVar(c1) ) ) == "rec" && o.evalType( infoVar( infoVar(c2) ) ) == "rec" ){
+						v = almacen[ infoVar(c1) ];
+						ValorOz* cmp = almacen[ infoVar(c2) ];
+						if( !o.compareRec(v, cmp) )
+							swapFail();
+						else
+							if ( !linkRec(v, cmp) ){
+								swapFail();
+								cout << "La ligadura de los registros no es posible " << infoVal(v) << " " << infoVal(cmp) <<"\n";
+							}
+					}
 					else if( infoVar( infoVar(c1) ) != infoVar( infoVar(c2) ) ){
 						swapFail();
 					}

@@ -1,8 +1,6 @@
 - - - Estado del Almacen - - -
 A -> 10
-B -> _
-M -> 20.100000
-W -> _
-X -> _
-Y -> _
-Z -> 20
+W -> Y
+X -> rec(c1:10)
+Y -> rec(c1:A)
+Z -> X
